@@ -1,8 +1,6 @@
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Scriptable/GunData", fileName = "Gun Data")]
-
+[CreateAssetMenu (menuName = "Scriptable/GunData", fileName = "GunData")]
 public class GunData:ScriptableObject
 {
     public AudioClip shotClip; // 발사 소리

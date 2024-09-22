@@ -15,8 +15,7 @@ public class PlayerInput : MonoBehaviour {
     public bool reload { get; private set; } // 감지된 재장전 입력값
 
     // 매프레임 사용자 입력을 감지
-    private void Update() 
-    {
+    private void Update() {
         // 게임오버 상태에서는 사용자 입력을 감지하지 않는다
         if (GameManager.instance != null && GameManager.instance.isGameover)
         {
@@ -27,13 +26,13 @@ public class PlayerInput : MonoBehaviour {
             return;
         }
 
-        // move에 관한 입력 감지 (return 값은 -1 ~ +1)
+        // move에 관한 입력 감지
         move = Input.GetAxis(moveAxisName);
-        // rotate에 관한 입력 감지 (return 값은 -1 ~ +1)
+        // rotate에 관한 입력 감지
         rotate = Input.GetAxis(rotateAxisName);
-        // fire에 관한 입력 감지 (return 값은 ture or flase)
+        // fire에 관한 입력 감지
         fire = Input.GetButton(fireButtonName);
-        // reload에 관한 입력 감지 (return 값은 ture or flase)
+        // reload에 관한 입력 감지
         reload = Input.GetButtonDown(reloadButtonName);
     }
 }
