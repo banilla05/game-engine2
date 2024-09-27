@@ -136,7 +136,7 @@ public class Gun : MonoBehaviour {
 
     // 재장전 시도
     public bool Reload() {
-        if (state == State.Ready || ammoRemain <= 0 || magAmmo >= gunData.magCapacity)
+        if (state == State.Reloading || ammoRemain <= 0 || magAmmo >= gunData.magCapacity)
         {
             return false;
         }
@@ -159,13 +159,13 @@ public class Gun : MonoBehaviour {
         yield return new WaitForSeconds(gunData.reloadTime);
 
         //탄창에 채울 탄알 계산
-        int ammoToFill = gunData.magCapacity = magAmmo;
+        int ammoToFill = gunData.magCapacity - magAmmo;
 
         //탄창에 채워야 할 탄알이 남은 탄알보다 많다면
         //채워야 할 탄알 수를 남은 탄알 수에 맞춰 줄임
         if (ammoToFill > ammoRemain)
         {
-            ammoToFill -= ammoRemain;
+            ammoToFill = ammoRemain;
         }
 
         //탄창을 채움
