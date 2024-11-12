@@ -17,7 +17,8 @@ public class PlayerShooter : MonoBehaviour {
         playerAnimator = GetComponent<Animator>();
     }
 
-    private void OnEnable() {
+    private void OnEnable() 
+    {
         // 슈터가 활성화될 때 총도 함께 활성화
         gun.gameObject.SetActive(true);
     }
@@ -27,7 +28,7 @@ public class PlayerShooter : MonoBehaviour {
         gun.gameObject.SetActive(false);
     }
 
-    private void Update() 
+    private void Update()
     {
         // 입력을 감지하고 총 발사하거나 재장전
         if (playerInput.fire)
@@ -37,10 +38,10 @@ public class PlayerShooter : MonoBehaviour {
         }
         else if (playerInput.reload)
         {
-            //재장전 입력 감지 시 재장전
-            if(gun.Reload())
+            // 재장전 입력 감지 시 재장전
+            if (gun.Reload())
             {
-                //재장전 성공 시에만 애니메이션 재생
+                // 재장전 성공 시에만 애니메이션 재생
                 playerAnimator.SetTrigger("Reload");
             }
         }
@@ -50,7 +51,8 @@ public class PlayerShooter : MonoBehaviour {
     }
 
     // 탄약 UI 갱신
-    private void UpdateUI() {
+    private void UpdateUI()
+    {
         if (gun != null && UIManager.instance != null)
         {
             // UI 매니저의 탄약 텍스트에 탄창의 탄약과 남은 전체 탄약을 표시
@@ -61,21 +63,23 @@ public class PlayerShooter : MonoBehaviour {
     // 애니메이터의 IK 갱신
     private void OnAnimatorIK(int layerIndex) 
     {
-        //총의 기준점 gunPivot을 3D 모댈의 오른쪽 팔꿈치 위치로 이동
+        //총의 기준점 GUNpIOT을 3D 모델의 오른쪽 팔꿈치 위치로 이동
         gunPivot.position = playerAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
 
-        // IK를 사용하여 왼손의 위치를 회전을 초의 왼쪽 손잡이에 맞춤
+        //IK를 사용하여 왼속의 위치와 회전을 총의 왼쪽 손잡이에 맞춤
         playerAnimator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1.0f);
         playerAnimator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1.0f);
 
         playerAnimator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandMount.position);
         playerAnimator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandMount.rotation);
 
-        // IK를 사용하여 왼손의 위치를 회전을 초의 오른쪽 손잡이에 맞춤
+        //IK를 사용하여 왼손의 위치와 회전을 총의 오른쪽 손잡이에 맞춤
         playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f);
         playerAnimator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1.0f);
 
         playerAnimator.SetIKPosition(AvatarIKGoal.RightHand, rightHandMount.position);
         playerAnimator.SetIKRotation(AvatarIKGoal.RightHand, rightHandMount.rotation);
+
+
     }
 }
